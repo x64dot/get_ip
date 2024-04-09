@@ -25,7 +25,7 @@ class Ipv4AddressManager:
             ipv4_result = self.GetIpv4Address()
 
             if ipv4_result == "Error":
-                
+
                 return ""
 
             try:
@@ -66,16 +66,32 @@ class Ipv4AddressManager:
         
 def main() -> str:
     print("Tip: Enter \".\" for current directory")
+    print("Tip: Enter \"noinput\" to only directly output your Ipv4 address on your terminal.")
 
     print("Enter the path of where the file will be stored: ", end="")
 
-    Ipv4_Path = input()
+    try:
+        Ipv4_Path = input()
+
+    except KeyboardInterrupt:
+        print("\n[!] Program Interrupted By User.")
+
+        exit()
+    
     Ipv4_Path = Ipv4_Path.strip()
+
 
     if Ipv4_Path == "":
         print("[-] You didn't supply any input.")
 
         exit()
+    
+    if Ipv4_Path == "noinput":
+        Ipv4_Obj = Ipv4AddressManager(Ipv4_Path, "Blah")
+
+        print("Ipv4 address: " + Ipv4_Obj.GetIpv4Address())
+
+        return "Success"
 
     if not Ipv4_Path == ".":
         if os.path.exists(Ipv4_Path) == True:
@@ -105,3 +121,4 @@ def main() -> str:
 
 if __name__ == "__main__":
     main()
+
