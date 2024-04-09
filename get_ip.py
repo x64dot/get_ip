@@ -25,6 +25,7 @@ class Ipv4AddressManager:
             ipv4_result = self.GetIpv4Address()
 
             if ipv4_result == "Error":
+                
                 return ""
 
             try:
@@ -45,6 +46,7 @@ class Ipv4AddressManager:
             ipv4_result = self.GetIpv4Address()
 
             if ipv4_result == "Error":
+
                 return ""
         
             try:
@@ -70,6 +72,11 @@ def main() -> str:
     Ipv4_Path = input()
     Ipv4_Path = Ipv4_Path.strip()
 
+    if Ipv4_Path == "":
+        print("[-] You didn't supply any input.")
+
+        exit()
+
     if not Ipv4_Path == ".":
         if os.path.exists(Ipv4_Path) == True:
             pass
@@ -80,6 +87,7 @@ def main() -> str:
 
     if not Ipv4_Path.endswith("/"):
         Ipv4_Path = Ipv4_Path + "/"
+    
 
     if Ipv4_Path == ".":
         ipv4_Obj = Ipv4AddressManager(Ipv4_Path, ".")
@@ -93,6 +101,7 @@ def main() -> str:
         if ipv4_Obj.Store_Ipv4() == "Success":
             print("[+] File created on " + Ipv4_Path + " directory.")
     
+    return "Success"
 
 if __name__ == "__main__":
     main()
